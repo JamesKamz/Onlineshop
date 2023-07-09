@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accueil</title>
+    </head>
+    <body>
+      <!--<div class="row">
+        <div class="col-md-12">
+          <form class="card card-sm" action="">
+            <div class="card-body row no-gutters align-items-center">
+              <div class="col">
+                <input type="search" placeholder='Entrez le nom du produit que vous cherchez' name="item-name" class="form-control form-control-borderless">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-secondary">Recherche</button>
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div> -->
+
+    <section id="hero">
+            <div class="hero-container">
+              <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        
+                <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+        
+                <div class="carousel-inner" role="listbox">
+        
+                  <div class="carousel-item active" style="background-image: url({% static 'img/slide-1.jpg'%})">
+                    <div class="carousel-container">
+                      <div class="carousel-content">
+                        <h2 class="animate__animated animate__fadeInDown">Bienvenue à <span>Oliveshop</span></h2>
+                        <p class="animate__animated animate__fadeInUp">Nous sommes spécialisés dans la fabrication des bracelets, colliers, porte-monnaie, porte-clef personnalisés</p>
+                        <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                      </div>
+                    </div>
+                  </div>
+        
+                  
+                  <div class="carousel-item" style="background-image: url({% static 'img/home8-jewelry-banner2.jpg'%})">
+                    <div class="carousel-container">
+                      <div class="carousel-content">
+                        <h2 class="animate__animated fanimate__adeInDown">Commandez vos Bracelets, Perles et Colliers Personnalisés  chez <span>Oliveshop</span></h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                      </div>
+                    </div>
+                  </div>
+        
+                  
+                  <div class="carousel-item" style="background-image: url({% static 'img/lookbook-10.jpg'%})">
+                    <div class="carousel-container">
+                      <div class="carousel-content">
+                        <h2 class="animate__animated animate__fadeInDown">Livraison gratuite partout à Lomé avec <span>Oliveshop</span></h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                      </div>
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                </a>
+        
+                <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                  <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                </a>
+        
+              </div>
+            </div>
+      </section>
+
+      <div class="row">
+            <div class="col-md-12">
+              <form class="card card-sm" action="">
+                <div class="card-body row no-gutters align-items-center">
+                  <div class="col">
+                    <input type="search" placeholder='Entrez le nom du produit que vous cherchez' name="item-name" class="form-control form-control-borderless">
+                  </div>
+                  <div class="col-auto">
+                    <button type="submit" class="btn btn-secondary">Recherche</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+      </div>
+      <div class="row" style="margin-bottom: 25px ;">
+         {% for product in products %}
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{ product.cover_image.url }}" alt="" class="card-ing-top">
+            <div class="card-body">
+              <div class="card-title">{{ product.name }}</div>
+              <div class="card-text">{{ product.price }}f CFA</div>
+              <a href="{% url 'detail' product.id %}" class="btn btn-danger">Voir</a>
+              <button class="btn btn-secondary">Ajouter</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    <div  class="row mt-3">
+      <div class="col-md-3 offset-md-4">
+        <ul class="pagination">
+          {% if products.has_previous %}
+          <li class="page-item">
+            <a  class="page-link " href="?page={{products.previous_page_number}}">Précedent</a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="btn btn-danger" href="?page={{products.number}}">{{products.number}}</a>
+          </li>
+
+          {% if products.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{products.next_page_number}}">Suivant</a>
+          </li>
+          {% endif %}
+        </ul>
+        </ul>
+      </div>
+    </div>
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+    
+        <div class="section-title">
+          <h2>Temoingnages</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+    
+        <div class="row">
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item">
+              <img src="{% static 'img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
+              <h3>Saul Goodman</h3>
+              <h4>Ceo &amp; Founder</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4 mt-lg-0">
+              <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+              <h3>Sara Wilsson</h3>
+              <h4>Designer</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+              <h3>Jena Karlis</h3>
+              <h4>Store Owner</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+              <h3>Matt Brandon</h3>
+              <h4>Freelancer</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
+              <h3>John Larson</h3>
+              <h4>Entrepreneur</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/testimonials/testimonials-6.jpg' %}" class="testimonial-img" alt="">
+              <h3>Emily Harison</h3>
+              <h4>Store Owner</h4>
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur. Sequi officiis ea et quia quidem.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div>
+    </section>
+{% endblock content %}
+{% block js %}
+{% endblock js %}
+    </body>
+</html>

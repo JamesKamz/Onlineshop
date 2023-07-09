@@ -1,0 +1,1 @@
+web: gunicorn Oliveshop.wsgi --log-file -

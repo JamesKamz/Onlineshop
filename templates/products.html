@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+  <title>Produits</title>
+</head>
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="{% url 'home' %}">Accueil</a></li>
+        <li>Nos Produits</li>
+      </ol>
+      <h2>Nos Produits</h2>
+
+    </div>
+</section>
+  <div class="row">
+      <div class="col-md-6">
+        <form class="card card-sm" action="">
+          <div class="card-body row no-gutters align-items-center">
+            <div class="col">
+              <input type="search" placeholder='Entrez le nom du produit que vous cherchez' name="item-name" class="form-control form-control-borderless">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-secondary">Recherche</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+  
+  <div class="row" style="margin-bottom: 25px;">
+    
+   {% for product in products %}
+   <div class="col-md-3">
+     <div class="card">
+       <img src="{{ product.cover_image.url }}" alt="" class="card-ing-top">
+       <div class="card-body">
+         <div class="card-title">{{ product.name }}</div>
+         <div class="card-text">{{ product.price }}f CFA</div>
+         <a href="{% url 'detail' product.id %}" class="btn btn-danger">Voir</a>
+         <button class="btn btn-secondary">Ajouter</button>
+       </div>
+     </div>
+   </div>
+   {% endfor %}
+  </div>
+    
+{% endblock content %}
+

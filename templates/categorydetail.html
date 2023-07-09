@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <div class="row" style="margin-bottom: 25px ;">
+    {% for product in products %}
+   <div class="col-md-3">
+     <div class="card">
+       <img src="{{ product.cover_image.url }}" alt="" class="card-ing-top">
+       <div class="card-body">
+         <div class="card-title">{{ product.name }}</div>
+         <div class="card-text">{{ product.price }}f CFA</div>
+         <a href="{% url 'detail' product.id %}" class="btn btn-danger">Voir</a>
+         <button class="btn btn-secondary">Ajouter</button>
+       </div>
+     </div>
+   </div>
+   {% endfor %}
+ </div>
+ 
+{% endblock content %}

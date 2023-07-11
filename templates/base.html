@@ -41,14 +41,25 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{% url 'home' %}" class="{% if activate_page == 'home' %}active{% endif %}">Accueil</a></l>
-          <li><a href="{% url 'product' %}" class="{% if activate_page == 'product' %}active{% endif %}">Nos produits</a></li>
-          <li><a href="{% url 'categories' %}" class="{% if activate_page == 'category' %}active{% endif %}">Catégories</a></li>
+          <li><a href="{% url 'product' %}" class="{% if activate_page == 'product' %}active{% endif %}">Shopping</a></li>
+          <li><a href="{% url 'categories' %}" class="{% if activate_page == 'category' %}active{% endif %}">Commande </a></li>
           <li><a href="{% url 'post' %}" class="{% if activate_page == 'blog' %}active{% endif %}">Blog</a></li>
-          <li><a href="{% url 'about' %}" class="{% if activate_page == 'about' %}active{% endif %}">A propos de Nous</a></li>
+          <li><a href="{% url 'about' %}" class="{% if activate_page == 'about' %}active{% endif %}">A propos</a></li>
           <li><a href="{% url 'contact' %}" class="{% if activate_page == 'contact' %}active{% endif %}">Contact</a></li>
+          <li class="dropdown" > <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
+            <img  id="cart-icon" src="{% static 'img/user-avatar-icon.png' %}"></a>
+              <ul class="dropdown-menu bs-warning-bg-subtle">
+                <li><a class="dropdown-item link-dark" href="{% url 'login' %}">Se connecter</a></li>
+                <li><a class="dropdown-item link-dark" href="#">Créer un compte</a></li>
+                <li><a class="dropdown-item link-dark" href="#">Drop Down 3</a></li>
+              </ul></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-        <a href="#" class="basket"><i class="bi bi-cart"></i></a>
+        <!--<a href="{% url 'view_cart' %}" class="basket {% if activate_page == 'view_cart' %}active{% endif %}"><i class="bi bi-cart"></i></a>-->
+        <a href="{% url 'view_cart' %}" class="{% if activate_page == 'view_cart' %}active{% endif %}" >
+          <img  id="cart-icon" src="{% static 'img/cart.png' %}">
+        </a>
+        <p>{{cartItems}}</p>
       </nav>
     </div>
   </header>
@@ -67,7 +78,7 @@
           <h4>Nous visitez</h4>
           <ul>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Accueil</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">A propos de nous</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">A propos</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Catégories</a></li>
           </ul>
         </div>
@@ -118,6 +129,32 @@
     <script src="{% static 'purecounter/purecounter_vanilla.js' %}"></script>
     <script src="{% static 'glightbox/js/glightbox.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.add-to-cart').click(function() {
+            var productId = $(this).data('product-id');
+            addToCart(productId);
+        });
+    });
+
+    function addToCart(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/add-to-cart/",
+            data: {
+                'product_id': productId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function() {
+                alert("Product added to cart!");
+            },
+            error: function() {
+                alert("An error occurred while adding the product to the cart.");
+            }
+        });
+    }
+</script>
 </body>
 </html>
 

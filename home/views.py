@@ -3,6 +3,35 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView
 from home.forms import ContactusForm
 from home.models import *
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
+
+
+@login_required
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        product = Product.objects.get(pk=product_id)
+        
+        cart = request.user.cart  # Assuming you have a OneToOneField relationship from User to Cart
+        cart.add_product(product)
+        
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': False})
+
+@login_required
+def view_cart(request):
+    cart = request.user.cart
+    cart_products = cart.get_products()
+    activate_page='view_cart'
+    context = {
+        'cart_products': cart_products,
+        'activate_page': activate_page
+    }
+    return render(request, 'cart.html', context)
+
 
 def home(request):
     products=Product.objects.all().order_by('name')

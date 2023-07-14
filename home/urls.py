@@ -3,6 +3,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from home.views import ArticleViewset
+from .signals import create_cart
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,8 +13,9 @@ urlpatterns = [
     path('contact/', views.ContactusView, name='contact'),
     path('product/', views.ProductViewset, name='product'),
     path('category/', views.CategoryViewset, name='categories'),
-    path('category/<str:id>', views.categorydetail, name='categorydetail'),   
-    path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
+    path('category/<str:id>', views.categorydetail, name='categorydetail'),
+    path('order/', views.OrderView.as_view() ,name='orders'),  
+    #path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.view_cart, name='view_cart'),
     path('blog/', ArticleViewset.as_view(), name='post'),
     path('', include('users.urls'))

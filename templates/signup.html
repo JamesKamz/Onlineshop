@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer un compte</title>
+ </head>  
+<body>
+  <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+  
+        <ol>
+          <li><a href="{% url 'home' %}">Accueil</a></li>
+          <li>Créer un compte</li>
+        </ol>
+        <h2>Créer un compte</h2>
+  
+      </div>
+  </section>
+<div class="container-fluid fullp"> 
+    <div class="row no-gutter"> 
+              <div class="col-md-6 d-none d-md-flex bg-image"></div> 
+              <div class="col-md-6 bg-light shadow-sm showHover" style="border-radius:16px ;">    
+                <div class="login d-flex align-items-center py-5"> 
+                <div class="container"> 
+      
+                  <div class="row"> 
+                    <h3 class="text-center display-4" style="font-weight:700">Création de compte</h3> <br>                   
+      
+                    <div class="col-lg-7 col-xl-6 mx-auto ">
+                      <h3 class="text-center display-4"></h3> <br>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form |crispy}}
+          <!--{% for field in form.visible_fields %}
+             <div class="form-group">
+                 {{ field.label_tag }}
+                    {% render_field field class="form-control" %}
+                      {% for error in field.errors %}
+                        <span style="color:red">{{ error }}</span>
+                      {% endfor %}
+           {% endfor %}-->
+           <br>
+           
+               <input type="submit" value="Créer" class="btn btn-block" style="background-color: #B09010;">
+             </div>
+      </form>
+             <div class="mt-2">
+                <p class="text-center">
+                  <small class="text-muted">
+                    Vous avez déja un compte? <a style="color:e96b56; text-decoration: none;" href="{% url 'login' %}">Se connecter</a>
+                  </small>
+                </p>
+              </div>   
+              <br>
+              
+              <br>
+      </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

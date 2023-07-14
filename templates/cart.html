@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Shopping Cart</h2>
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="{% url 'home' %}">Accueil</a></li>
+        <li>Mes Produits</li>
+      </ol>
+      <h2>Mon pannier</h2>
+
+    </div>
+</section>
     
     {% for product in cart_products %}
         <div class="product">
@@ -9,6 +19,12 @@
             <p>Price: ${{ product.price }}</p>
         </div>
     {% empty %}
-        <p>Your cart is empty.</p>
+       <div class="text-center">
+        <p>Vous n'avez pas aucun produit dans le pannier.</p>
+       </div>
     {% endfor %}
+    
+    {% if cart_total %}
+        <p>Total: ${{ cart_total }}</p>
+    {% endif %}
 {% endblock %}

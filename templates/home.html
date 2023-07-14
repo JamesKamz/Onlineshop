@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% block content %}
 <!DOCTYPE html>
 <html>
@@ -98,7 +99,7 @@
             <div class="card-body">
               <div class="card-title">{{ product.name }}</div>
               <div class="card-text">{{ product.price }}f CFA</div>
-              <a href="{% url 'detail' product.id %}" class="btn btn-danger">Voir</a>
+              <a href="{% url 'detail' product.id %}" class="btn" style="background-color: #B09010;">Voir</a>
               <button class="btn btn-secondary add-to-cart" data-product-id="{{ product.id }}">Ajouter</button>
             </div>
           </div>
@@ -106,21 +107,21 @@
         {% endfor %}
       </div>
     <div  class="row mt-3">
-      <div class="col-md-3 offset-md-4">
-        <ul class="pagination">
+      <div class="col-md-3 offset-md-4 text-center">
+        <ul class="pagination text-center">
           {% if products.has_previous %}
           <li class="page-item">
-            <a  class="page-link " href="?page={{products.previous_page_number}}">Précedent</a>
+            <a  class="page-link " style="background-color: #B09010;" href="?page={{products.previous_page_number}}">Précedent</a>
           </li>
           {% endif %}
 
           <li class="page-item active">
-            <a class="btn btn-danger" href="?page={{products.number}}">{{products.number}}</a>
+            <a class="btn btn-secondary"  href="?page={{products.number}}">{{products.number}}</a>
           </li>
 
           {% if products.has_next %}
           <li class="page-item">
-            <a class="page-link" href="?page={{products.next_page_number}}">Suivant</a>
+            <a class="page-link" style="background-color: #B09010;" href="?page={{products.next_page_number}}">Suivant</a>
           </li>
           {% endif %}
         </ul>
@@ -221,6 +222,34 @@
     </section>
 {% endblock content %}
 {% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.add-to-cart').click(function() {
+            var productId = $(this).data('product-id');
+            addToCart(productId);
+        });
+    });
+
+    function addToCart(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/add-to-cart/",
+            data: {
+                'product_id': productId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function() {
+                alert("Product added to cart!");
+            },
+            error: function() {
+                alert("An error occurred while adding the product to the cart.");
+            }
+        });
+    }
+</script>
+</body>
+</html>
 {% endblock js %}
     </body>
 </html>

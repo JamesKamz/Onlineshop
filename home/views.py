@@ -1,37 +1,55 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 from home.forms import ContactusForm
 from home.models import *
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 
 
-
-@login_required
+@csrf_exempt
+@login_required(login_url='login')
 def add_to_cart(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id')
-        product = Product.objects.get(pk=product_id)
-        
-        cart = request.user.cart  # Assuming you have a OneToOneField relationship from User to Cart
-        cart.add_product(product)
-        
+        product = get_object_or_404(Product, pk=product_id)
+
+        cart, _ = Cart.objects.get_or_create(user=request.user)
+
+        cart.products.add(product)
         return JsonResponse({'success': True})
     
-    return JsonResponse({'success': False})
+    return JsonResponse({'success': False, 'message': 'Invalid request'})
 
-@login_required
+@login_required(login_url='login')
 def view_cart(request):
-    cart = request.user.cart
-    cart_products = cart.get_products()
-    activate_page='view_cart'
-    context = {
+    try:
+        cart = request.user.cart
+        cart_products = cart.get_products()
+        cart_total = cart_products.aggregate(total_price=models.Sum('price'))['total_price']
+        activate_page = 'view_cart'
+        context = {
         'cart_products': cart_products,
+        'cart_total': cart_total,
         'activate_page': activate_page
     }
+    except Cart.DoesNotExist:
+        cart_products = []
+        context = {
+            'cart_products': cart_products,
+            'activate_page': 'view_cart',
+            'message': 'Your cart is empty.'
+        }
     return render(request, 'cart.html', context)
 
+class OrderView(View):
+    def get(self , request ):
+        customer = request.session.get('customer')
+        orders = Order.get_orders_by_customer(customer)
+        print(orders)
+        return render(request , 'account/orders.html'  , {'orders' : orders})
 
 def home(request):
     products=Product.objects.all().order_by('name')
@@ -60,14 +78,29 @@ def categorydetail(request, id):
     return render(request, 'categorydetail.html', {'category':categor, 'products':products})
 
 def ProductViewset(request):
-   products=Product.objects.all()
-   item_name=request.GET.get('item-name')
-   activate_page='product'
-   if item_name !='' and item_name is not None:
-        products=Product.objects.filter(name__icontains=item_name)
-   return render(request, 'products.html', {'products': products, 'activate_page':activate_page})
-   
+    products=Product.objects.all()
+    item_name=request.GET.get('item-name')
+    activate_page='product'
+    cart = request.session.get('cart')
+    if not cart:
+        request.session['cart'] = {}
+    products = None
+    categories = Category.get_all_categories()
+    categoryID = request.GET.get('category')
+    if categoryID:
+        products = Product.get_all_products_by_categoryid(categoryID)
+    else:
+        products = Product.get_all_products()
     
+    if item_name !='' and item_name is not None:
+        products=Product.objects.filter(name__icontains=item_name)
+    data = {}
+    data['products'] = products
+    data['categories'] = categories
+    data['activate_page'] = activate_page
+    print('you are : ', request.session.get('username'))
+    return render(request, 'products.html', data)
+       
 class ArticleViewset(ListView):
     model=Article
     template_name='blog.html'

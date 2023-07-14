@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
+    'crispy_forms',
+    'widget_tweaks',
     'home',
     'users',
 ]
@@ -81,12 +84,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-     'default': env.db(),
+     #'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
-    # read os.environ['SQLITE_URL']
-    'extra': env.db_url(
-        'DATABASE_URL',
-    )
+    #read os.environ['SQLITE_URL']
+    #'extra': env.db_url(
+     #   'DATABASE_URL',
+    #)
 }
 
 
@@ -129,6 +136,8 @@ STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS=[
  #   BASE_DIR / "static",
 #]
+
+CRISPY_TEMPLATE_PACK = 'Bootstrap4'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')

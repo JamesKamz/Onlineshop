@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.views.generic import ListView, View
 from home.forms import ContactusForm
@@ -11,17 +11,49 @@ from django.shortcuts import get_object_or_404
 
 @csrf_exempt
 @login_required(login_url='login')
-def add_to_cart(request):
+def add_to_cart(request, product_id):
     if request.method == 'POST':
-        product_id = request.POST.get('product_id')
+        # product_id_ = request.POST.get('product_id')
         product = get_object_or_404(Product, pk=product_id)
 
-        cart, _ = Cart.objects.get_or_create(user=request.user)
+        cart= Cart.objects.get_or_create(user=request.user)
 
         cart.products.add(product)
-        return JsonResponse({'success': True})
+
+        context={
+            'product':product,
+            'cart_product': cart.products.values_list('id', flat=True)
+        }
+        return render (request, 'product.html', context)
     
     return JsonResponse({'success': False, 'message': 'Invalid request'})
+
+@login_required(login_url='login')
+def add_item_to_cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    cart, _= Cart.objects.get_or_create(user=request.user)
+    cart.products.add(product)
+    
+    context={
+        'product':product,
+        'cart_product': cart.products.values_list('id', flat=True)
+    }
+    return redirect ('/product/')
+
+@login_required(login_url='login')
+def remove_item_to_cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    cart, _= Cart.objects.get_or_create(user=request.user)
+
+    cart.products.remove(product)
+
+    context={
+        'product':product,
+        'cart_product': cart.products.values_list('id', flat=True)
+    }
+    return redirect ('/cart/')
+
 
 @login_required(login_url='login')
 def view_cart(request):

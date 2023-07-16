@@ -100,7 +100,7 @@
               <div class="card-title">{{ product.name }}</div>
               <div class="card-text">{{ product.price }}f CFA</div>
               <a href="{% url 'detail' product.id %}" class="btn" style="background-color: #B09010;">Voir</a>
-              <button class="btn btn-secondary add-to-cart" data-product-id="{{ product.id }}">Ajouter</button>
+              <a class="btn btn-secondary" href="{% url 'product' %}">Shop</a>
             </div>
           </div>
         </div>

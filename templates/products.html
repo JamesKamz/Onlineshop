@@ -44,7 +44,7 @@
             <a href="#products" class="list-group-item list-group-item-action btn btn-secondary">Tous les Produicts</a>
     
             {% for category in categories %}
-            <a href="/?category={{category.id}}"
+            <a href=" {% url 'categorydetail' category.id %}"
               class="list-group-item list-group-item-action btn btn-secondary ">{{category.name}}</a>
             {% endfor %}
           </div>
@@ -60,7 +60,8 @@
                 <p class="card-title">{{product.name}}</p>
                 <p class="card-text"><b>{{product.price}}f CFA</b></p>
                 <a href="{% url 'detail' product.id %}" class="btn" style="background-color: #B09010;">Voir</a>
-                <a><button class="btn btn-secondary add-to-cart" data-product-id="{{ product.id }}">Ajouter</button></a>
+                {% comment %} <a href="{% url 'add_to_cart' product.id %}"><button class="btn btn-secondary" >Ajouter</button></a> {% endcomment %}
+                <a href="/add_item_to_cart/{{product.id}}"><button class="btn btn-secondary" >Ajouter</button></a>
               </div>
     
             </div>

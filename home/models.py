@@ -21,7 +21,7 @@ class Product(models.Model):
     active=models.BooleanField(default=True)
     name=models.CharField(max_length=100)
     description=models.TextField(blank=True, null=True)
-    cover_image=models.ImageField(upload_to='images')
+    cover_image=models.ImageField(upload_to='')
     price=models.DecimalField(max_digits=9, decimal_places=2)
     number=models.PositiveIntegerField(default=1)
     category=models.ForeignKey(Category, on_delete=models.CASCADE )

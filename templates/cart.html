@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<head>
+    <title>Pannier</title>
+  </head>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
@@ -14,10 +17,14 @@
 </section>
     
     {% for product in cart_products %}
-        <div class="product">
-            <h3>{{ product.name }}</h3>
-            <p>Price: ${{ product.price }}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <h3>{{ product.name }} {{current}}</h3>
+            <p>Prix: {{ product.price }}f CFA<br> Nombre:  <a><button class="btn btn-secondary">-</button></a> {{product.number}} <a><button class="btn btn-secondary">+</button></a></p>
+            <a href="/remove_item_to_cart/{{product.id}}"><button class="btn btn-danger">Supprimer</button></a>
         </div>
+        <br>
+    </div>
     {% empty %}
        <div class="text-center">
         <p>Vous n'avez pas aucun produit dans le pannier.</p>
@@ -25,6 +32,13 @@
     {% endfor %}
     
     {% if cart_total %}
-        <p>Total: ${{ cart_total }}</p>
+        <br>
+        <br>
+    <div class="row text-center">
+        <h1>Total={{ cart_total }}f CFA</h1>
+        <a href="#"><button class="btn" style="background-color:#B09010">Payer</button></a>
+    </div>
+    <br>
+    <br>
     {% endif %}
 {% endblock %}

@@ -15,7 +15,8 @@ urlpatterns = [
     path('category/', views.CategoryViewset, name='categories'),
     path('category/<str:id>', views.categorydetail, name='categorydetail'),
     path('order/', views.OrderView.as_view() ,name='orders'),  
-    #path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
+    path('remove_item_to_cart/<str:product_id>', views.remove_item_to_cart, name='remove_item_to_cart'),
+    path('add_item_to_cart/<str:product_id>', views.add_item_to_cart, name='add_item_to_cart'),
     path('cart/', views.view_cart, name='view_cart'),
     path('blog/', ArticleViewset.as_view(), name='post'),
     path('', include('users.urls'))

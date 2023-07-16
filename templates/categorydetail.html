@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
+<head>
+  <title>{{category.name}}</title>
+</head>
+<h1>{{category.name}}</h1>
+<div class="row mx-auto">
+  {% for product in products %}
+  <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+    <img class="card-img-top" src="{{product.cover_image.url}}" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-title">{{product.name}}</p>
+      <p class="card-text"><b>{{product.price}}f CFA</b></p>
+      <a href="{% url 'detail' product.id %}" class="btn" style="background-color: #B09010;">Voir</a>
+      {% comment %} <a href="{% url 'add_to_cart' product.id %}"><button class="btn btn-secondary" >Ajouter</button></a> {% endcomment %}
+      <a href="/add_item_to_cart/{{product.id}}"><button class="btn btn-secondary" >Ajouter</button></a>
+    </div>
 
- <div class="row" style="margin-bottom: 25px ;">
-    {% for product in products %}
-   <div class="col-md-3">
-     <div class="card">
-       <img src="{{ product.cover_image.url }}" alt="" class="card-ing-top">
-       <div class="card-body">
-         <div class="card-title">{{ product.name }}</div>
-         <div class="card-text">{{ product.price }}f CFA</div>
-         <a href="{% url 'detail' product.id %}" class="btn btn-danger">Voir</a>
-         <button class="btn btn-secondary add-to-cart" data-product-id="{{ product.id }}" >Ajouter</button>
-       </div>
-     </div>
-   </div>
-   {% endfor %}
- </div>
+  </div>
+  {% endfor %}
+</div>
  
 {% endblock content %}

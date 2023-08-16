@@ -36,14 +36,14 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{form |crispy}}
-          <!--{% for field in form.visible_fields %}
-             <div class="form-group">
-                 {{ field.label_tag }}
-                    {% render_field field class="form-control" %}
-                      {% for error in field.errors %}
-                        <span style="color:red">{{ error }}</span>
-                      {% endfor %}
-           {% endfor %}-->
+        {% comment %} <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+          </div> {% endcomment %}
+        </div>
            <br>
            
                <input type="submit" value="Créer" class="btn btn-block" style="background-color: #B09010;">

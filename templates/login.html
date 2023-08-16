@@ -36,19 +36,16 @@
                   <h3 class="text-center display-4"></h3> <br>                                 
   <form action="" method="POST" class="">
     {% csrf_token %}
-    {{form |crispy}}
-       <!--{% for field in form.visible_fields %}
-         <div class="form-group">
-             {{ field.label_tag }}
-                {% render_field field class="form-control" %}
-                  {% if messages%}
-                    {% for message in messages %}
-                      <span style="color:red">{{ message }}</span>
-                    {% endfor %}
-                   {% endif %}
-       {% endfor %}-->
+    <div class="form-floating mb-3">
+      <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+      <label for="floatingInput">Nom d'utilisateur</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+      <label for="floatingPassword">Mot de passe</label>
+    </div>
        <br> 
-           <input type="submit" value="Se connecter" class="btn btn-block" style="background-color: #B09010;">
+    <input type="submit" value="Se connecter" class="btn btn-block" style="background-color: #B09010;">
   </form>
   </main>
   </div>

@@ -82,7 +82,7 @@ class Cart(models.Model):
     
 class Order(models.Model):
     customer=models.ForeignKey(User, on_delete=models.CASCADE, default=True)
-    commaand=models.ForeignKey(Cart,on_delete=models.CASCADE, null=True)
+    command=models.ForeignKey(Cart,on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=50,null=True)
     address = models.CharField(max_length=500,null=True)
     telephone = models.CharField(max_length=20,null=True)

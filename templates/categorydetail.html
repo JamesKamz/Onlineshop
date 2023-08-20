@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <head>
-  <title>{{category.name}}</title>
+  <title >{{category.name}}</title>
 </head>
-<h1>{{category.name}}</h1>
+<br>
+<br>
+<div class"section-title">  
+     <h1 class="fw-bold text-uppercase fs-3 text-center" >{{category.name}}</h1>
+</div>
+<br>
+<br>
+<br>
 <div class="row mx-auto">
   {% for product in products %}
   <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
@@ -19,5 +27,75 @@
   </div>
   {% endfor %}
 </div>
+<br>
+<br>
+<br>
+<section id="testimonials" class="testimonials">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Commentaires sur les {{category.name}} </h2>
+      {% comment %} <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> {% endcomment %}
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-4">
+        <div class="testimonial-item mt-4 mt-lg-0">
+          <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+          <h3>Sara Wilsson</h3>
+          {% comment %} <h4>Desigr</h4> {% endcomment %}
+          <p>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="testimonial-item mt-4">
+          <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+          <h3>Jena Karlis</h3>
+          {% comment %} <h4>Store Owner</h4> {% endcomment %}
+          <p>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="testimonial-item mt-4">
+          <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+          <h3>Matt Brandon</h3>
+          {% comment %} <h4>Freelancer</h4> {% endcomment %}
+          <p>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="row justify-content-md-center">
+  <div class="col-md-5">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label fw-bold">Votre Nom</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nom">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label fw-bold">Commentaires</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-secondary">Ajouter</button>
+  </div>
+</div>
+<br>
+<br>
  
 {% endblock content %}

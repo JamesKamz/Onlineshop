@@ -38,26 +38,26 @@
     
         <!-- filter -->
     
-        <div class="col-lg-3 mx-auto">
+        <div class="col-lg-2 mx-auto">
           <div class="list-group">
     
-            <a href="#products" class="list-group-item list-group-item-action btn btn-secondary">Tous les Produicts</a>
+            <a href="#products" class="btn btn-dark list-group-item list-group-item-action">Tous les Produicts</a>
     
             {% for category in categories %}
             <a href=" {% url 'categorydetail' category.id %}"
-              class="list-group-item list-group-item-action btn btn-secondary ">{{category.name}}</a>
+              class="list-group-item list-group-item-action btn btn-dark ">{{category.name}}</a>
             {% endfor %}
           </div>
         </div>
     
         <!-- all products -->
-        <div id='products' class="col-lg-9 mx-auto">
+        <div id='products' class="col-lg-10 mx-auto">
           <div class="row mx-auto">
             {% for product in products %}
-            <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+            <div class="card mx-auto mb-3" id="{{product.id}}" style="width: 18rem;">
               <img class="card-img-top" src="{{product.cover_image.url}}" alt="Card image cap">
               <div class="card-body">
-                <p class="card-title">{{product.name}}</p>
+                <p class="card-title fw-bolder">{{product.name}}</p>
                 <p class="card-text"><b>{{product.price}}f CFA</b></p>
                 <a href="{% url 'detail' product.id %}" class="btn" style="background-color: #B09010;">Voir</a>
                 {% comment %} <a href="{% url 'add_to_cart' product.id %}"><button class="btn btn-secondary" >Ajouter</button></a> {% endcomment %}

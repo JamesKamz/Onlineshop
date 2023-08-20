@@ -1,25 +1,113 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load static %}
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <div>
+{% comment %} <div class="row ">
+    <div class="col-md-4">
+        <div class="">
            <img src="{{product.cover_image.url}}" width="500px" height="500px" alt="{{product.name}}">
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="text-danger display-3">
+    <div class="col-md-4">
+        <div class="display-6 fw-bold mb-4">
             {{ product.name }}
         </div> 
         <div class="text-secondary">
            Prix:  {{ product.price }}f CFA
         </div>
-        <div>
+        <div class="mb-3">
             {{ product.description }}
         </div>
         <div>
-            <a href=""><button class="btn btn-secondary add-to-cart" data-product-id="{{ product.id }}">Acheter</button></a>
+            <a href=""><button class="btn btn-secondary mb-3 add-to-cart" data-product-id="{{ product.id }}">Acheter</button></a>
         </div>
+    </div>
+</div> {% endcomment %}
+<div class="card mb-3" style="max-width: 920px;">
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{product.cover_image.url}}" class="img-fluid rounded-start" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">{{ product.name }}</h5><br>
+        <h5 class="text-secondary">
+          <b>Prix:</b>  {{ product.price }}f CFA
+       </h5>
+        <br><br>
+        <p class="card-text"><b>Description : </b>{{ product.description }}
+        <p class="card-text"><br><br>
+        <small class="card-text"><b>Catégorie: </b> {{ product.category }}.</small></p>
+      </div> <br><br>
+      <div class="justify-content-md-center">
+        <a href=""><button class="btn btn-secondary mb-3 add-to-cart" data-product-id="{{ product.id }}">Acheter</button></a>
+    </div>
+    </div>
+  </div>
+</div>
+<section id="testimonials" class="testimonials">
+    <div class="container">
+  
+      <div class="section-title">
+        <h2>Commentaires sur {{product.name}} </h2>
+        {% comment %} <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> {% endcomment %}
+      </div>
+  
+      <div class="row">
+  
+        <div class="col-lg-4">
+          <div class="testimonial-item mt-4 mt-lg-0">
+            <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            {% comment %} <h4>Desigr</h4> {% endcomment %}
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+  
+        <div class="col-lg-4">
+          <div class="testimonial-item mt-4">
+            <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+            <h3>Jena Karlis</h3>
+            {% comment %} <h4>Store Owner</h4> {% endcomment %}
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+  
+        <div class="col-lg-4">
+          <div class="testimonial-item mt-4">
+            <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+            <h3>Matt Brandon</h3>
+            {% comment %} <h4>Freelancer</h4> {% endcomment %}
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  <div class="row justify-content-md-center">
+    <div class="col-md-5">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label fw-bold">Votre Nom</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nom">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label fw-bold">Commentaires</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary mb-3">Ajouter</button>
     </div>
 </div>
 {% endblock content %}

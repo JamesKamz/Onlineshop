@@ -5,6 +5,36 @@
 <head>
   <title>Produits</title>
 </head>
+<script>
+  // Récupération des éléments DOM
+  const quantityElement = document.getElementById("quantity");
+  const incrementButton = document.getElementById("increment");
+  const decrementButton = document.getElementById("decrement");
+
+  let cartQuantity = 0;
+
+  // Mise à jour de l'affichage de la quantité
+  function updateQuantityDisplay() {
+    quantityElement.textContent = cartQuantity;
+  }
+
+  // Gestionnaire de clic pour l'ajout au panier
+  incrementButton.addEventListener("click", () => {
+    cartQuantity++;
+    updateQuantityDisplay();
+  });
+
+  // Gestionnaire de clic pour le retrait du panier
+  decrementButton.addEventListener("click", () => {
+    if (cartQuantity > 0) {
+      cartQuantity--;
+      updateQuantityDisplay();
+    }
+  });
+
+  // Initialisation de l'affichage
+  updateQuantityDisplay();
+</script>
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
 
@@ -85,12 +115,48 @@
    </div>
    {% endfor %}
   </div> -->
+  <h1>Mon Panier</h1>
+  <p>Quantité dans le panier: <span id="quantity"></span></p>
+  <button id="increment">Ajouter au panier</button>
+  <button id="decrement">Retirer du panier</button>
   {% endblock content %}
   {% block js %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-</script>
+
+ 
+
+  <script>
+    // Récupération des éléments DOM
+    const quantityElement = document.getElementById("quantity");
+    const incrementButton = document.getElementById("increment");
+    const decrementButton = document.getElementById("decrement");
+
+    let cartQuantity = 0;
+
+    // Mise à jour de l'affichage de la quantité
+    function updateQuantityDisplay() {
+      quantityElement.textContent = cartQuantity;
+    }
+
+    // Gestionnaire de clic pour l'ajout au panier
+    incrementButton.addEventListener("click", () => {
+      cartQuantity++;
+      updateQuantityDisplay();
+    });
+
+    // Gestionnaire de clic pour le retrait du panier
+    decrementButton.addEventListener("click", () => {
+      if (cartQuantity > 0) {
+        cartQuantity--;
+        updateQuantityDisplay();
+      }
+    });
+
+    // Initialisation de l'affichage
+    updateQuantityDisplay();
+  </script>
+
 
   {% endblock js %}
   </body>

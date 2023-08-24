@@ -39,6 +39,59 @@
               </form>
             </div>
       </div> {% endcomment %}
+      <section id="hero">
+        <div class="hero-container">
+          <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    
+            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+    
+            <div class="carousel-inner" role="listbox">
+    
+              <div class="carousel-item active" style="background-image: url({% static 'img/slide-1.jpg'%})">
+                <div class="carousel-container">
+                  <div class="carousel-content">
+                    <h2 class="animate__animated animate__fadeInDown">Bienvenue à <span>Oliveshop</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Une Boutique en ligne avec une diversité de produits pour femmes, Nous sommes également spécialisés dans la fabrication des bracelets, colliers, porte-monnaie, porte-clef personnalisés</p>
+                    <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                  </div>
+                </div>
+              </div>
+    
+              
+              <div class="carousel-item" style="background-image: url({% static 'img/home8-jewelry-banner2.jpg'%})">
+                <div class="carousel-container">
+                  <div class="carousel-content">
+                    <h2 class="animate__animated fanimate__adeInDown">Commandez vos Bracelets, Perles et Colliers Personnalisés  chez <span>Oliveshop</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Vous cherchez à écrire vos noms sur des bracelets, Façonner vos colliers à votre goût nous avons la solution pour vous.</p>
+                    <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                  </div>
+                </div>
+              </div>
+    
+              
+              <div class="carousel-item" style="background-image: url({% static 'img/lookbook-10.jpg'%})">
+                <div class="carousel-container">
+                  <div class="carousel-content">
+                    <h2 class="animate__animated animate__fadeInDown">Livraison gratuite partout à Lomé avec <span>Oliveshop</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Vos produits vous seront livrés à 3h au maximum avec une sécurité hors norme.</p>
+                    <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+    
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+    
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+    
+          </div>
+        </div>
+  </section>
       <div class="row" style="margin-bottom: 25px ;">
          {% for product in products %}
         <div class="col-md-3">
@@ -76,59 +129,7 @@
         </ul>
       </div>
     </div>
-    <section id="hero">
-      <div class="hero-container">
-        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  
-          <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-  
-          <div class="carousel-inner" role="listbox">
-  
-            <div class="carousel-item active" style="background-image: url({% static 'img/slide-1.jpg'%})">
-              <div class="carousel-container">
-                <div class="carousel-content">
-                  <h2 class="animate__animated animate__fadeInDown">Bienvenue à <span>Oliveshop</span></h2>
-                  <p class="animate__animated animate__fadeInUp">Nous sommes spécialisés dans la fabrication des bracelets, colliers, porte-monnaie, porte-clef personnalisés</p>
-                  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
-                </div>
-              </div>
-            </div>
-  
-            
-            <div class="carousel-item" style="background-image: url({% static 'img/home8-jewelry-banner2.jpg'%})">
-              <div class="carousel-container">
-                <div class="carousel-content">
-                  <h2 class="animate__animated fanimate__adeInDown">Commandez vos Bracelets, Perles et Colliers Personnalisés  chez <span>Oliveshop</span></h2>
-                  <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
-                </div>
-              </div>
-            </div>
-  
-            
-            <div class="carousel-item" style="background-image: url({% static 'img/lookbook-10.jpg'%})">
-              <div class="carousel-container">
-                <div class="carousel-content">
-                  <h2 class="animate__animated animate__fadeInDown">Livraison gratuite partout à Lomé avec <span>Oliveshop</span></h2>
-                  <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                  <a href="" class="btn-get-started animate__animated animate__fadeInUp">Voir plus</a>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-          <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-          </a>
-  
-          <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-          </a>
-  
-        </div>
-      </div>
-</section>
+    
     <section id="testimonials" class="testimonials">
       <div class="container">
     

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # 'rest_framework',
     'corsheaders',
     'crispy_forms',
+    'crispy_bootstrap4',
     'widget_tweaks',
     'home',
     'users',
@@ -138,6 +139,7 @@ STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 #]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'Bootstrap4'
 
 MEDIA_URL = '/images/'

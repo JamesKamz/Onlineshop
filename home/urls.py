@@ -5,7 +5,6 @@ from . import views
 from home.views import ArticleViewset
 from .signals import create_cart
 
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('<str:id>', views.detail, name='detail'),
@@ -23,3 +22,4 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'users.views.Errorview'

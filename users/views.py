@@ -40,3 +40,6 @@ class UserSignup(CreateView):
 def Userlogout(request):
     logout(request)
     return redirect('login')
+
+def Errorview(request, exception):
+    return render(request, 'error404.html', status=404)
